@@ -22,7 +22,7 @@ class Board
   def place_tiles
     grid.each_with_index do |row, row_idx|
       row.each_with_index do |col, col_idx|
-        self[[row_idx,col_idx]] = Tile.new
+        self[[row_idx,col_idx]] = Tile.new([row_idx, col_idx])
       end
     end
   end
@@ -38,5 +38,13 @@ class Board
       end
     end
   end
+
+  # def update_tiles
+  #   grid.each_with_index do |row, row_idx|
+  #     row.each_with_index do |col, col_idx|
+  #
+  #     end
+  #   end
+  # end
 
 end
