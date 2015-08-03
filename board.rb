@@ -56,32 +56,42 @@ class Board
   [ 1,  -1],
   [ 0, -1],
   [ -1,  -1]
-]
+  ]
 
-def valid_tiles(pos)
-  valid_tiles = []
-  cur_x, cur_y = pos
-  NEIGHBOR_TILES.each do |(dx, dy)|
-    if (cur_x + dx).between?(0, 8) && (cur_y + dy).between?(0, 8)
-      valid_tiles << self[[cur_x + dx, cur_y + dy]]
+  def valid_tiles(pos)
+    valid_tiles = []
+    cur_x, cur_y = pos
+    NEIGHBOR_TILES.each do |(dx, dy)|
+      if (cur_x + dx).between?(0, 8) && (cur_y + dy).between?(0, 8)
+        valid_tiles << self[[cur_x + dx, cur_y + dy]]
+      end
+    end
+    valid_tiles
+  end
+
+  def update_tiles
+    grid.each_with_index do |row, row_idx|
+      row.each_with_index do |col, col_idx|
+        self[[row_idx, col_idx]].neighbors = valid_tiles([row_idx, col_idx])
+        update_bomb_count(self[[row_idx, col_idx]])
+      end
     end
   end
-  valid_tiles
-end
 
-def update_tiles
-  grid.each_with_index do |row, row_idx|
-    row.each_with_index do |col, col_idx|
-      self[[row_idx, col_idx]].neighbors = valid_tiles([row_idx, col_idx])
-      update_bomb_count(self[[row_idx, col_idx]])
+  def update_bomb_count(tile)
+    tile.neighbors.each do |neighbor|
+      tile.neighbor_bomb_count += 1 if neighbor.bombed
     end
   end
-end
 
-def update_bomb_count(tile)
-  tile.neighbors.each do |neighbor|
-    tile.neighbor_bomb_count += 1 if neighbor.bombed
+  def over?
+    blown_up? || all_revealed?
   end
-end
+
+  def blown_up?
+  end
+
+  def all_revealed?
+  end
 
 end
