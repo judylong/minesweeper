@@ -16,6 +16,31 @@ class Board
     update_tiles
   end
 
+  def display
+    grid.each_with_index do |row, row_idx|
+      row.each_with_index do |col, col_idx|
+        display_logic(self[[row_idx, col_idx]])
+      end
+      print "\n"
+    end
+    return nil
+  end
+
+  def display_logic(tile)
+    if !tile.revealed? && !tile.flagged?
+      print "*"
+    elsif !tile.revealed? && tile.flagged?
+      print "F"
+    elsif tile.revealed? && tile.bombed?
+      print "B"
+    elsif tile.revealed? && tile.neighbor_bomb_count > 0
+      print "#{tile.neighbor_bomb_count}"
+    elsif tile.revealed? && tile.neighbor_bomb_count == 0 && !tile.bombed?
+      print "_"
+
+    end
+  end
+
   def [](pos)
     x, y = pos
     grid[x][y]
@@ -83,12 +108,12 @@ class Board
     end
   end
 
-  def over?(user_pick)
-    blown_up?(user_pick) || all_revealed?
+  def over?(user_pick, action)
+    blown_up?(user_pick, action) || all_revealed?
   end
 
-  def blown_up?(user_pick)
-    self[user_pick].bombed? && self[user_pick].revealed?
+  def blown_up?(user_pick, action)
+    self[user_pick].bombed? && action == "reveal"
   end
 
   def all_revealed?
