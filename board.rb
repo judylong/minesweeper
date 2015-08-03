@@ -7,6 +7,14 @@ class Board
 
   def initialize
     @grid = Array.new(9) {Array.new(9)}
+    setup_board
+  end
+
+  def setup_board
+    place_tiles
+    place_bombs
+    update_tiles
+    update_bomb_count
   end
 
   def [](pos)
