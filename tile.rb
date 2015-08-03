@@ -11,5 +11,16 @@ class Tile
     @position = position
   end
 
+  def bombed?
+    bombed
+  end
 
+  def flagged?
+    flagged
+  end
+
+  def revealed?
+    revealed
+  end
+  
 end
