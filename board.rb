@@ -1,5 +1,5 @@
 require_relative 'tile.rb'
-
+require 'byebug'
 class Board
   NUMBER_OF_BOMBS = 9
 
@@ -52,29 +52,22 @@ class Board
 
 def valid_tiles(pos)
   valid_tiles = []
-
   cur_x, cur_y = pos
-  p pos
-  p cur_x
-  p cur_y
   NEIGHBOR_TILES.each do |(dx, dy)|
-    updated_x, updated_y = (cur_x + dx), (cur_y + dy)
-    p self[[updated_x, updated_y]]
-    new_tile = self[[cur_x + dx, cur_y + dy]]
-
-    if new_tile.position.all? { |coord| coord.between?(0, 7) }
-      valid_tiles << new_tile
+    if (cur_x + dx).between?(0, 8) && (cur_y + dy).between?(0, 8)
+      valid_tiles << self[[cur_x + dx, cur_y + dy]]
     end
   end
-
   valid_tiles
 end
-  # def update_tiles
-  #   grid.each_with_index do |row, row_idx|
-  #     row.each_with_index do |col, col_idx|
-  #       # this specific @ row_idx, col_idx update_neighbors
-  #     end
-  #   end
-  # end
+
+def update_tiles
+  grid.each_with_index do |row, row_idx|
+    row.each_with_index do |col, col_idx|
+      self[[row_idx, col_idx]].neighbors = valid_tiles([row_idx, col_idx])
+      # this specific @ row_idx, col_idx update_neighbors
+    end
+  end
+end
 
 end
