@@ -12,7 +12,11 @@ class Game
   end
 
   def play
-
+    prompt
+    until board.over?(current_position)
+      board.perform_action(current_position, current_action)
+      prompt
+    end
   end
 
   def prompt
