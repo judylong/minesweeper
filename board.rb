@@ -14,7 +14,6 @@ class Board
     place_tiles
     place_bombs
     update_tiles
-    update_bomb_count
   end
 
   def [](pos)
@@ -84,11 +83,12 @@ class Board
     end
   end
 
-  def over?
-    blown_up? || all_revealed?
+  def over?(user_pick)
+    blown_up?(user_pick) || all_revealed?
   end
 
-  def blown_up?
+  def blown_up?(user_pick)
+    self[user_pick].bombed? && self[user_pick].revealed?
   end
 
   def all_revealed?
