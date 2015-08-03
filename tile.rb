@@ -26,19 +26,28 @@ class Tile
   def reveal
     # self.revealed = true
     queue = [self]
-    p self
+    # p self
     until queue.empty?
-      #p queue
       current = queue.shift
+      p current
       if current.neighbor_bomb_count == 0
-        queue + current.neighbors
+        current.neighbors.each do |neighbor|
+          if !neighbor.revealed?
+            queue << neighbor
+          end
+        end
       end
       current.revealed = true
     end
+
   end
 
   def toggle_flag
     flagged? ? self.flagged = false : self.flagged = true
+  end
+
+  def inspect
+    print "Tile: @flagged:#{flagged}; @revealed: #{revealed}; @bombed: #{bombed}; @position: #{position}"
   end
 
 end
