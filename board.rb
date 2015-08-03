@@ -37,7 +37,6 @@ class Board
       print "#{tile.neighbor_bomb_count}"
     elsif tile.revealed? && tile.neighbor_bomb_count == 0 && !tile.bombed?
       print "_"
-
     end
   end
 
@@ -72,14 +71,14 @@ class Board
   end
 
   NEIGHBOR_TILES = [
-  [-1, 0],
-  [-1,  1],
-  [0, 1],
-  [1,  1],
-  [ 1, 0],
-  [ 1,  -1],
-  [ 0, -1],
-  [ -1,  -1]
+    [-1, 0],
+    [-1,  1],
+    [0, 1],
+    [1,  1],
+    [ 1, 0],
+    [ 1,  -1],
+    [ 0, -1],
+    [ -1,  -1]
   ]
 
   def valid_tiles(pos)

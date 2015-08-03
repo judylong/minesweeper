@@ -5,7 +5,7 @@ class Game
 
   attr_accessor :board, :current_action, :current_position
 
-  def initialize(board=Board.new)
+  def initialize(board = Board.new)
     @board = board
     @current_action = nil
     @current_position = nil
