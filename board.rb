@@ -100,4 +100,13 @@ class Board
     true
   end
 
+  def perform_action(pos, action)
+    if action == "flag"
+      self[pos].toggle_flag
+    elsif action == "reveal"
+      self[pos].reveal
+    else
+      raise "enter valid action!"
+    end
+  end
 end
