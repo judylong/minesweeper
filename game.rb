@@ -30,3 +30,10 @@ class Game
   end
 
 end
+
+
+if $PROGRAM_NAME == __FILE__
+
+    g = Game.new
+    g.play
+end
