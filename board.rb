@@ -65,8 +65,14 @@ def update_tiles
   grid.each_with_index do |row, row_idx|
     row.each_with_index do |col, col_idx|
       self[[row_idx, col_idx]].neighbors = valid_tiles([row_idx, col_idx])
-      # this specific @ row_idx, col_idx update_neighbors
+      update_bomb_count(self[[row_idx, col_idx]])
     end
+  end
+end
+
+def update_bomb_count(tile)
+  tile.neighbors.each do |neighbor|
+    tile.neighbor_bomb_count += 1 if neighbor.bombed
   end
 end
 
