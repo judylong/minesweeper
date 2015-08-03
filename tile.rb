@@ -5,6 +5,8 @@ class Tile
     @revealed = false
     @flagged = false
     @bombed = bombed
+    @neighbors = []
+    @neighbor_bomb_count = 0
   end
 
 end
