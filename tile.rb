@@ -23,4 +23,12 @@ class Tile
     revealed
   end
 
+  def reveal
+    self.revealed = true
+  end
+
+  def toggle_flag
+    flagged? ? self.flagged = false : self.flagged = true
+  end
+
 end
