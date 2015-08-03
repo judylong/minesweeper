@@ -22,5 +22,5 @@ class Tile
   def revealed?
     revealed
   end
-  
+
 end

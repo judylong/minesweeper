@@ -92,6 +92,12 @@ class Board
   end
 
   def all_revealed?
+    grid.each_with_index do |row, row_idx|
+      row.each_with_index do |col, col_idx|
+        return false if !self[[row_idx, col_idx]].revealed?
+      end
+    end
+    true
   end
 
 end
