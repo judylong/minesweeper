@@ -11,8 +11,5 @@ class Tile
     @position = position
   end
 
-  def find_neighbors
-
-  end
 
 end

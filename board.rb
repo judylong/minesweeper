@@ -39,10 +39,40 @@ class Board
     end
   end
 
+  NEIGHBOR_TILES = [
+  [-1, 0],
+  [-1,  1],
+  [0, 1],
+  [1,  1],
+  [ 1, 0],
+  [ 1,  -1],
+  [ 0, -1],
+  [ -1,  -1]
+]
+
+def valid_tiles(pos)
+  valid_tiles = []
+
+  cur_x, cur_y = pos
+  p pos
+  p cur_x
+  p cur_y
+  NEIGHBOR_TILES.each do |(dx, dy)|
+    updated_x, updated_y = (cur_x + dx), (cur_y + dy)
+    p self[[updated_x, updated_y]]
+    new_tile = self[[cur_x + dx, cur_y + dy]]
+
+    if new_tile.position.all? { |coord| coord.between?(0, 7) }
+      valid_tiles << new_tile
+    end
+  end
+
+  valid_tiles
+end
   # def update_tiles
   #   grid.each_with_index do |row, row_idx|
   #     row.each_with_index do |col, col_idx|
-  #
+  #       # this specific @ row_idx, col_idx update_neighbors
   #     end
   #   end
   # end
