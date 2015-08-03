@@ -19,25 +19,11 @@ class Board
   def display
     grid.each_with_index do |row, row_idx|
       row.each_with_index do |col, col_idx|
-        display_logic(self[[row_idx, col_idx]])
+        print self[[row_idx, col_idx]].to_s
       end
       print "\n"
     end
     return nil
-  end
-
-  def display_logic(tile)
-    if !tile.revealed? && !tile.flagged?
-      print "*"
-    elsif !tile.revealed? && tile.flagged?
-      print "F"
-    elsif tile.revealed? && tile.bombed?
-      print "B"
-    elsif tile.revealed? && tile.neighbor_bomb_count > 0
-      print "#{tile.neighbor_bomb_count}"
-    elsif tile.revealed? && tile.neighbor_bomb_count == 0 && !tile.bombed?
-      print "_"
-    end
   end
 
   def [](pos)

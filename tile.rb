@@ -26,10 +26,8 @@ class Tile
   def reveal
     # self.revealed = true
     queue = [self]
-    # p self
     until queue.empty?
       current = queue.shift
-      p current
       if current.neighbor_bomb_count == 0
         current.neighbors.each do |neighbor|
           if !neighbor.revealed?
@@ -41,6 +39,21 @@ class Tile
     end
 
   end
+
+  def to_s
+    if !self.revealed? && !self.flagged?
+      "*"
+    elsif !self.revealed? && self.flagged?
+      "F"
+    elsif self.revealed? && self.bombed?
+      "B"
+    elsif self.revealed? && self.neighbor_bomb_count > 0
+      "#{self.neighbor_bomb_count}"
+    elsif self.revealed? && self.neighbor_bomb_count == 0 && !self.bombed?
+      "_"
+    end
+  end
+
 
   def toggle_flag
     flagged? ? self.flagged = false : self.flagged = true
